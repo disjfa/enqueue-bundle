@@ -17,11 +17,17 @@ class EnqueueController extends Controller
      * @var TraceableProducer
      */
     private $producer;
+
     /**
      * @var FlashBagInterface
      */
     private $flashBag;
 
+    /**
+     * EnqueueController constructor.
+     * @param TraceableProducer $producer
+     * @param FlashBagInterface $flashBag
+     */
     public function __construct(TraceableProducer $producer, FlashBagInterface $flashBag)
     {
         $this->producer = $producer;

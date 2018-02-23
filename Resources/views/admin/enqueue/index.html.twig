@@ -6,5 +6,37 @@
             <h1>Enqueue</h1>
         </div>
     </div>
-    {{ dump(list) }}
+    <div class="container py-3">
+        <p>
+            <a href="{{ path('admin_enqueue_add') }}" class="btn btn-outline-info">Add a demo message</a>
+        </p>
+        <p>
+            If the queue does not run, run this command. Or add it to a cron.
+        </p>
+        <p>
+            <code>bin/console enqueue:consume</code>
+        </p>
+        <table class="table">
+            <tr>
+                <th>{{ 'thead.queue' | trans }}</th>
+                <th>{{ 'thead.properties' | trans }}</th>
+                <th>{{ 'thead.body' | trans }}</th>
+                <th>{{ 'thead.priority' | trans }}</th>
+                <th>{{ 'thead.publishedAt' | trans }}</th>
+            </tr>
+            {% for message in list %}
+                <tr>
+                    <td>{{ message.queue }}</td>
+                    <td>{{ message.properties }}</td>
+                    <td>{{ message.body }}</td>
+                    <td>{{ message.priority }}</td>
+                    <td>{{ message.publishedAt }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">{{ 'message.queue_empty' | trans }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}

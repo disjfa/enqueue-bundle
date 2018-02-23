@@ -17,7 +17,7 @@ class EnqueueMenuListener
             $menu->addChild('enqueue', [
                 'label' => 'Enqueue',
                 'route' => 'admin_enqueue_index',
-            ])->setExtra('icon', 'fa-tachometer-alt');
+            ])->setExtra('icon', 'fa-sort-numeric-down');
         } catch (RouteNotFoundException $e) {
             // routing.yml not set up
             return;
