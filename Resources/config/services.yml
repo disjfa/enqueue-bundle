@@ -1,0 +1,31 @@
+parameters:
+  disjfa_Enqueue.unsplash.application_id: ''
+  disjfa_Enqueue.unsplash.secret: ''
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  Disjfa\EnqueueBundle\:
+      resource: '../../*'
+      exclude: '../../{Entity,Migrations,Tests}'
+
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  Disjfa\EnqueueBundle\Controller\:
+      resource: '../../Controller'
+      tags: ['controller.service_arguments']
+
+  Disjfa\EnqueueBundle\Menu\Admin\EnqueueMenuListener:
+      autowire: true
+      tags:
+        - { name: 'kernel.event_listener', event: 'glynn_admin.menu_configure', method: 'onMenuConfigure', priority: -50 }
+
+  Disjfa\EnqueueBundle\Processor\DemoAppProcessor:
+      public: true
+      tags:
+          - { name: 'enqueue.client.processor' }
