@@ -1,24 +1,28 @@
 {
-  "name": "disjfa/enqueue-bundle",
-  "description": "Enqueue bundle, bundles the enqueue bundle and add some user interfaces and examples.",
-  "keywords": [
-    "ampq", "message", "enqueue", "php-enqueue", "message-bus"
-  ],
-  "type": "symfony-bundle",
-  "require": {
-    "enqueue/dbal": "^0.8.19",
-    "enqueue/enqueue-bundle": "^0.8.21"
-  },
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "disjfa",
-      "email": "disjfa@disjfa.nl"
+    "name": "disjfa/enqueue-bundle",
+    "description": "Enqueue bundle, bundles the enqueue bundle and add some user interfaces and examples.",
+    "keywords": [
+        "ampq",
+        "message",
+        "enqueue",
+        "php-enqueue",
+        "message-bus"
+    ],
+    "type": "symfony-bundle",
+    "require": {
+        "enqueue/dbal": "^0.8.19",
+        "enqueue/enqueue-bundle": "^0.8.21"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "disjfa",
+            "email": "disjfa@disjfa.nl"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Disjfa\\EnqueueBundle\\": ""
+        }
     }
-  ],
-  "autoload": {
-    "psr-4": {
-      "Disjfa\\EnqueueBundle\\": ""
-    }
-  }
 }
