@@ -3,10 +3,11 @@
 namespace Disjfa\EnqueueBundle\Controller\Admin;
 
 use Disjfa\EnqueueBundle\Entity\Enqueue;
-use Enqueue\Client\TraceableProducer;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Disjfa\EnqueueBundle\Model\DemoModel;
+use Disjfa\EnqueueBundle\Service\ProcessorService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin/enqueue")
@@ -14,24 +15,23 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 class EnqueueController extends Controller
 {
     /**
-     * @var TraceableProducer
-     */
-    private $producer;
-
-    /**
      * @var FlashBagInterface
      */
     private $flashBag;
+    /**
+     * @var ProcessorService
+     */
+    private $processorService;
 
     /**
      * EnqueueController constructor.
-     * @param TraceableProducer $producer
+     * @param ProcessorService $processorService
      * @param FlashBagInterface $flashBag
      */
-    public function __construct(TraceableProducer $producer, FlashBagInterface $flashBag)
+    public function __construct(ProcessorService $processorService, FlashBagInterface $flashBag)
     {
-        $this->producer = $producer;
         $this->flashBag = $flashBag;
+        $this->processorService = $processorService;
     }
 
     /**
@@ -53,7 +53,8 @@ class EnqueueController extends Controller
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $this->producer->send('demo_add', 'Message was added: demo_add');
+        $model = new DemoModel('test - ' . uniqid());
+        $this->processorService->handle($model);
 
         $this->flashBag->add('success', 'Added a message to the producer');
 
