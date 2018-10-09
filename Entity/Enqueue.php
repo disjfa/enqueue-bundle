@@ -2,7 +2,6 @@
 
 namespace Disjfa\EnqueueBundle\Entity;
 
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

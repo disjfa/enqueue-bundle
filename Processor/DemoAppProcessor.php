@@ -2,6 +2,7 @@
 
 namespace Disjfa\EnqueueBundle\Processor;
 
+use Disjfa\EnqueueBundle\Model\DemoWasCreatedMessage;
 use Interop\Queue\PsrMessage;
 use Interop\Queue\PsrContext;
 use Interop\Queue\PsrProcessor;
@@ -42,6 +43,6 @@ class DemoAppProcessor implements PsrProcessor, TopicSubscriberInterface
      */
     public static function getSubscribedTopics()
     {
-        return ['demo_add'];
+        return [DemoWasCreatedMessage::NAME];
     }
 }
