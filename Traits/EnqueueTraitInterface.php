@@ -8,7 +8,6 @@ interface EnqueueTraitInterface
 {
     /**
      * @param EnqueueMessage $enqueueMessage
-     * @return void
      */
     public function recordMessage(EnqueueMessage $enqueueMessage);
 

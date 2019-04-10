@@ -27,6 +27,7 @@ class DemoAppProcessor implements PsrProcessor, TopicSubscriberInterface
     /**
      * @param PsrMessage $message
      * @param PsrContext $session
+     *
      * @return object|string
      */
     public function process(PsrMessage $message, PsrContext $session)

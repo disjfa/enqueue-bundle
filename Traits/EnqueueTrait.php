@@ -26,6 +26,7 @@ trait EnqueueTrait
     {
         $enqueueMessages = $this->enqueueMessages;
         $this->enqueueMessages = [];
+
         return $enqueueMessages;
     }
 }

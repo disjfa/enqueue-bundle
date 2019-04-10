@@ -5,14 +5,14 @@ namespace Disjfa\EnqueueBundle\Controller\Admin;
 use Disjfa\EnqueueBundle\Entity\Enqueue;
 use Disjfa\EnqueueBundle\Model\DemoModel;
 use Disjfa\EnqueueBundle\Service\ProcessorService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin/enqueue")
  */
-class EnqueueController extends Controller
+class EnqueueController extends AbstractController
 {
     /**
      * @var FlashBagInterface
@@ -25,7 +25,8 @@ class EnqueueController extends Controller
 
     /**
      * EnqueueController constructor.
-     * @param ProcessorService $processorService
+     *
+     * @param ProcessorService  $processorService
      * @param FlashBagInterface $flashBag
      */
     public function __construct(ProcessorService $processorService, FlashBagInterface $flashBag)
@@ -53,12 +54,11 @@ class EnqueueController extends Controller
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $model = new DemoModel('test - ' . uniqid());
+        $model = new DemoModel('test - '.uniqid());
         $this->processorService->handle($model);
 
         $this->flashBag->add('success', 'Added a message to the producer');
 
         return $this->redirectToRoute('admin_enqueue_index');
     }
-
 }
